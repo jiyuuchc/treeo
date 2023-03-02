@@ -33,7 +33,6 @@ class _TrivialPytree:
     def __init_subclass__(cls):
         jax.tree_util.register_pytree_node_class(cls)
 
-
 class FieldMetadata:
     node: bool
     kind: type

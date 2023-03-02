@@ -206,13 +206,13 @@ class TreeMeta(ABCMeta):
                 obj = cls.construct(obj, *args, **kwargs)
 
         # check for uninitialized fields
-        for field in obj._field_metadata:
-            if not hasattr(obj, field) or isinstance(
-                getattr(obj, field), dataclasses.Field
-            ):
-                raise TypeError(
-                    f"Field '{field}' of '{type(obj).__name__}' was not initialized. Make sure to initialize all annotated fields."
-                )
+        # for field in obj._field_metadata:
+        #     if not hasattr(obj, field) or isinstance(
+        #         getattr(obj, field), dataclasses.Field
+        #     ):
+        #         raise TypeError(
+        #             f"Field '{field}' of '{type(obj).__name__}' was not initialized. Make sure to initialize all annotated fields."
+        #         )
 
         if _COMPACT_CONTEXT.new_subtrees is not None:
             _COMPACT_CONTEXT.new_subtrees.append(obj)
@@ -253,7 +253,6 @@ class TreeMeta(ABCMeta):
 class _MutableState(enum.Enum):
     TOPLEVEL = 1
     ALL = 2
-
 
 class Tree(metaclass=TreeMeta):
     _field_metadata: tp.Dict[str, types.FieldMetadata]
